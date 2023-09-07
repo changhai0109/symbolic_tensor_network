@@ -33,6 +33,7 @@ class ReplicateGraph(GraphOPBase):
                 tensor.x2 = old_new_id_map[tensor.x2]
         # create empty graph
         new_graph = SymbolicGraph(csv_filename=None)
+        # then fill fields and tensors
         new_graph.keys = keys
         new_graph.tensors = tensors
         return new_graph

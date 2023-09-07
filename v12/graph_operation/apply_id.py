@@ -6,7 +6,7 @@ id_cnt = 0
 
 class GraphApplyID(GraphOPBase):
     def __init__(self, name_id_map=None):
-        super(GraphApplyID, self).__init__(("x1_name", "x2_name"), (), ("tensor_id"))
+        super(GraphApplyID, self).__init__(("tensor_name"), (), ("tensor_id"))
         if name_id_map is None:
             name_id_map = dict()
         self.name_id_map = name_id_map
@@ -19,4 +19,4 @@ class GraphApplyID(GraphOPBase):
                 id_ = id_cnt
                 id_cnt += 1
             tensor["tensor_id"] = id_cnt
-        return
+        return graph

@@ -25,3 +25,4 @@ class GraphVisualizer(GraphOPBase):
             if tensor.x2 is not None:
                 f.edge(tensor.x2, tensor.tensor_id)
         f.render(self.filename, format=self.format, cleanup=True)
+        return graph

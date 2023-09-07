@@ -17,11 +17,18 @@ class GraphOPBase:
             graph.keys.append(key)
         return
 
-    def apply(self, graph: SymbolicGraph):
-        self.check_signature(graph)
-        self.process(graph)
-        self.added_signature(graph)
-        return
+    def apply(self, *args, **kwargs):
+        for arg in args:
+            if isinstance(arg, SymbolicGraph):
+                self.check_signature(arg)
+        for arg in kwargs.value():
+            if isinstance(arg, SymbolicGraph):
+                self.check_signature(arg)
+        rets = self.process(*args, **kwargs)
+        for ret in rets:
+            if isinstance(ret, SymbolicGraph):
+                self.added_signature(ret)
+        return rets
 
     def process(self, graph: SymbolicGraph):
         raise NotImplementedError()

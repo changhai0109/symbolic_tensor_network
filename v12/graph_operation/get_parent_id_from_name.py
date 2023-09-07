@@ -3,10 +3,18 @@ from symbolic_graph import SymbolicGraph
 
 
 class GetParentIdFromName(GraphOPBase):
-    def __init__(self):
-        super(GetParentIdFromName, self).__init__(
-            ("tensor_name", "tensor_id", "x1_name", "x2_name"), (), ("x1", "x2")
-        )
+    def __init__(self, clear_parent_name=True):
+        if clear_parent_name:
+            super(GetParentIdFromName, self).__init__(
+                ("tensor_name", "tensor_id", "x1_name", "x2_name"),
+                ("x1_name", "x2_name"),
+                ("x1", "x2"),
+            )
+        else:
+            super(GetParentIdFromName, self).__init__(
+                ("tensor_name", "tensor_id", "x1_name", "x2_name"), (), ("x1", "x2")
+            )
+        self.clear_parent_name = clear_parent_name
 
     def process(self, graph: SymbolicGraph):
         name_id_map = dict()
@@ -19,7 +27,11 @@ class GetParentIdFromName(GraphOPBase):
             if tensor.x1_name is not None:
                 assert tensor.x1_name in name_id_map
                 tensor["x1"] = name_id_map[tensor.x1_name]
+                if self.clear_parent_name:
+                    del tensor["x1_name"]
             if tensor.x2_name is not None:
                 assert tensor.x2_name in name_id_map
                 tensor["x2"] = name_id_map[tensor.x2_name]
-        return
+                if self.clear_parent_name:
+                    del tensor["x2_name"]
+        return graph

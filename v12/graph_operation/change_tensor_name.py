@@ -10,4 +10,4 @@ class ChangeTensorName(GraphOPBase):
     def process(self, graph: SymbolicGraph):
         for tensor in graph.tensors:
             tensor.tensor_name = self.template % (tensor.tensor_name,)
-        return
+        return graph
