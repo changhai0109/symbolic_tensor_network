@@ -27,7 +27,7 @@ class GraphOPBase:
         rets = self.process(*args, **kwargs)
         for ret in rets:
             if isinstance(ret, SymbolicGraph):
-                self.added_signature(ret)
+                self.change_signature(ret)
         return rets
 
     def process(self, graph: SymbolicGraph):
