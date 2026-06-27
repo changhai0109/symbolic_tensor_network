@@ -1,0 +1,8 @@
+## A demo scripts to generate Chakra ET with STAGE and simulate through AstraSIM
+
+### Steps:
+- Prepare astra-sim docker: `bash prepare_astra_sim.sh`, and it will start an interactive container
+- Prepare STAGE within docker: INSIDE container (and all followsing steps are inside container), `bash prepare_stage.sh`
+- Generate Workloads: `bash generate_workload.sh`
+- (Optional) Visualize generated Chakra ETs: `chakra_visualizer --input_filename ./workloads/toy_arws.0.et --output_filename ./workloads/toy_arws.0.pdf`
+- Run simulation through AstraSim: `bash run_astrasim.sh`, and the results will be saved in `*.stdout`
